@@ -3,9 +3,34 @@
 #include "Board.h"
 int main(){
     Board* board = (Board*) malloc(sizeof(Board));
+    int x1 = 0;
+    int y1 = 0;
+    int x2 = 0;
+    int y2 = 0;
+    int continueGame = 0;
     printf("Board is:\n");
     initBoard(board);
-    showBoard(board);
+    do
+    {
+        showBoard(board);
+        printf("\n");
+        printf("Enter start position:\n");
+        printf("Enter x:\n");
+        scanf("%d",&x1);
+        printf("Enter y:\n");
+        scanf("%d",&y1);
+        printf("Enter end position:\n");
+        printf("Enter x:\n");
+        scanf("%d",&x2);
+        printf("Enter y:\n");
+        scanf("%d",&y2);
+        printf("Continue game? 1.Yes 2.No\n");
+        scanf("%d",&continueGame);
+        movePiece(board,x1,y1,x2,y2);
+
+    } while (continueGame==1);
+    
+
     system("pause");
     return 0;
 }
