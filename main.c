@@ -13,8 +13,6 @@ int main(){
         showBoard(board);
         showMenu(board,&x1,&y1,&x2,&y2,&continueGame);
     } while (continueGame==1);
-    
-
     system("pause");
     return 0;
 }

@@ -34,48 +34,26 @@ int showBoard(Board* board){
 
 int initBoard(Board* board){
     int i,j;
+    char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'};
     for(i=0;i<8;i++){
         for(j=0;j<8;j++){
             board->squares[i][j].x=i+1;
             board->squares[i][j].y=j+1;
-            board->squares[i][j].piece.type=' ';
-            if(i==0){
-                if(j==0 || j==7)
-                    board->squares[i][j].piece.type='R';
-                if(j==1 || j==6)
-                    board->squares[i][j].piece.type='N';
-                if(j==2 || j==5)
-                    board->squares[i][j].piece.type='B';
-                if(j==3)
-                    board->squares[i][j].piece.type='Q';
-                if(j==4)
-                    board->squares[i][j].piece.type='K';
-                board->squares[i][j].piece.player=1;
-            }
-            if(i==1){
-                board->squares[i][j].piece.type='P';
-                board->squares[i][j].piece.player=1;
-            }
-                            
-            if(i==6){
-                board->squares[i][j].piece.type='P';
-                board->squares[i][j].piece.player=2;
-            }
-            if(i==7){
-                if(j==0 || j==7)
-                    board->squares[i][j].piece.type='R';
-                if(j==1 || j==6)
-                    board->squares[i][j].piece.type='N';
-                if(j==2 || j==5)
-                    board->squares[i][j].piece.type='B';
-                if(j==3)
-                    board->squares[i][j].piece.type='Q';
-                if(j==4)
-                    board->squares[i][j].piece.type='K';
-                board->squares[i][j].piece.player=2;
-            }
+            board->squares[i][j].piece.player = 3;
+            board->squares[i][j].piece.type = ' ';
 
+            if(i==0 || i==1)
+                board->squares[i][j].piece.player=1;
+            else if (i==6 || i==7)
+                board->squares[i][j].piece.player=2;
 
+            if(i==1 || i==6){
+                board->squares[i][j].piece.type='P';
+            }
+            else if(i==0 || i==7){
+                board->squares[i][j].piece.type=piecesFirstLineOrder[j];
+            }
+                  
             
         }
     }
