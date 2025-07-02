@@ -77,6 +77,11 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
         return 1;
     }
 
+    if(isAValidMove(board,x1,y1,x2,y2)==1){
+        printf("isNotValidMove\n");
+        return 1;
+    }
+
 
     printf("Moving %c from %d %d to %d %d\n",board->squares[x1-1][y1-1].piece.type,x1,y1,x2,y2);
     board->squares[x2-1][y2-1].piece.type=board->squares[x1-1][y1-1].piece.type;
