@@ -29,6 +29,8 @@ int isAPiece(Board* board,int x1,int y1){
     return 0;
 }
 
+
+
 int isAValidMove(Board* board,int x1,int y1,int x2,int y2){
     if(board->squares[x1-1][y1-1].piece.type=='P'){
         if((y1-y2!=0 || (x1-x2!=1&&x1-x2!=-1))){
@@ -38,6 +40,52 @@ int isAValidMove(Board* board,int x1,int y1,int x2,int y2){
             return 1;
         }
     }
+    if(board->squares[x1-1][y1-1].piece.type=='R'){
+        if((y1-y2!=0 && x1-x2!=0)){
+            printf("Invalid move, its not a valid move for a rook\n");
+            printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
+            printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
+            return 1;
+        }
+    }
+
+    if(board->squares[x1-1][y1-1].piece.type=='B'){
+        if((y1-y2==0 || x1-x2==0)){
+            printf("Invalid move, its not a valid move for a bishop\n");
+            printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
+            printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
+            return 1;
+        }
+    }
+
+    if(board->squares[x1-1][y1-1].piece.type=='N'){
+        if(!(((y1-y2==2 || y1-y2==-2) && (x1-x2==1||x1-x2==-1) || (y1-y2==1 || y1-y2==-1) && (x1-x2==2||x1-x2==-2)))){
+            printf("Invalid move, its not a valid move for a knight\n");
+            printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
+            printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
+            return 1;
+        }
+    }
+    
+    if(board->squares[x1-1][y1-1].piece.type=='Q'){
+        if((y1-y2==0 || x1-x2==0 || y1-y2!=0 && x1-x2!=0)){
+            printf("Invalid move, its not a valid move for a queen\n");
+            printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
+            printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
+            return 1;
+        }
+    }
+
+
+    if(board->squares[x1-1][y1-1].piece.type=='K'){
+        if(((y1-y2>1 || y1-y2<-1) || (x1-x2>1||x1-x2<-1))){
+            printf("Invalid move, its not a valid move for a king\n");
+            printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
+            printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
+            return 1;
+        }
+    }
+
     return 0;
 }
 
