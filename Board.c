@@ -1,5 +1,7 @@
 #include "Board.h"
 
+
+
 int showBoard(Board* board){
     int i,j;
     for(i=0;i<8;i++){
@@ -63,25 +65,19 @@ int initBoard(Board* board){
 }
 
 int movePiece(Board* board,int x1,int y1,int x2,int y2){
-    if(isOutBounds(x1,y1,x2,y2)==1){
-        printf("isOutBounds\n");
-        return 1;
+    
+    Payload payload={board,x1,y1,x2,y2};
+
+    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove};
+
+    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
+    
+    for(int i=0;i<numValidationFunctions;i++){
+        if(validationFunctions[i](&payload)==1){
+            return 1;
+        }
     }
 
-    if(isPlayerTurn(board,x1,y1)==1){
-        printf("isNotPlayerTurn\n");
-        return 1;
-    }
-
-    if(isAPiece(board,x1,y1)==1){
-        printf("isnotPiece\n");
-        return 1;
-    }
-
-    if(isAValidMove(board,x1,y1,x2,y2)==1){
-        printf("isNotValidMove\n");
-        return 1;
-    }
 
 
     printf("Moving %c from %d %d to %d %d\n",board->squares[x1-1][y1-1].piece.type,x1,y1,x2,y2);

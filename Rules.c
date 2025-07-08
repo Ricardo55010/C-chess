@@ -1,6 +1,7 @@
 #include "Rules.h"
 #include "Board.h"
-int isOutBounds(int x1,int y1,int x2,int y2){
+int isOutBounds(Payload* payload){
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     if((x2-1<0 || x2-1>7) || (y2-1<0 || y2-1>7)){
         printf("Invalid move, out of bounds\n");
         return 1;
@@ -13,7 +14,9 @@ int isOutBounds(int x1,int y1,int x2,int y2){
     return 0;
 }
 
-int isPlayerTurn(Board* board,int x1,int y1){
+int isPlayerTurn(Payload* payload){
+    Board* board = payload->board;
+    int x1=payload->x1,y1=payload->y1;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
     int currentPlayerTurn = board->playerTurn;
     if(OriginPiece.player!=currentPlayerTurn){
@@ -23,7 +26,9 @@ int isPlayerTurn(Board* board,int x1,int y1){
     return 0;
 }
 
-int isAPiece(Board* board,int x1,int y1){
+int isAPiece(Payload* payload){
+    Board* board = payload->board;
+    int x1=payload->x1,y1=payload->y1;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
     if(OriginPiece.type==' '){
         printf("Invalid move, theres no piece in %d %d\n",x1,y1);
@@ -34,7 +39,9 @@ int isAPiece(Board* board,int x1,int y1){
 
 
 
-int isAValidMove(Board* board,int x1,int y1,int x2,int y2){
+int isAValidMove(Payload* payload){
+    Board* board = payload->board;
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
     Piece TargetPiece = board->squares[x2-1][y2-1].piece;
 
