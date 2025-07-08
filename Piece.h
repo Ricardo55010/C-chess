@@ -3,5 +3,6 @@
 typedef struct Piece{
     char type;
     int player;
+    int timesMoved;
 } Piece;
 #endif
