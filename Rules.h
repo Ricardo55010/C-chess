@@ -1,6 +1,6 @@
 #ifndef RULES_H
 #define RULES_H
-struct Board; // forward declaration to avoid circular dependency with Board.h
+//struct Board; // forward declaration to avoid circular dependency with Board.h
 typedef struct Payload{
     struct Board* board;
     int x1,y1,x2,y2;

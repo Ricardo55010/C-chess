@@ -85,7 +85,7 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
     board->squares[x2-1][y2-1].piece.player=board->squares[x1-1][y1-1].piece.player;
     board->squares[x2-1][y2-1].piece.timesMoved=board->squares[x1-1][y1-1].piece.timesMoved+1;
     board->squares[x1-1][y1-1].piece.type=' ';
-    board->squares[x1-1][y1-1].piece.player=NULL;
+    board->squares[x1-1][y1-1].piece.player=3;
     board->squares[x1-1][y1-1].piece.timesMoved=0;
     board->playerTurn= board->playerTurn==1?2:1;
     return 0;
