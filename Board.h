@@ -1,8 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include<stdio.h>
-#include"Square.h"
-#include"Rules.h"
+#include"square.h"
+#include"rules.h"
 typedef struct Board{
     Square squares[8][8];
     int playerTurn;

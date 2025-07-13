@@ -1,6 +1,6 @@
 #ifndef SQUARE_H
 #define SQUARE_H
-#include "Piece.h"
+#include "piece.h"
 typedef struct Square{
     int x;
     int y;
