@@ -77,65 +77,19 @@ int isAPieceBlockingTheWay(Payload* payload){
         printf("you are a knight, you can jump over pieces!\n");
         return 0;
     }
-    if(x1 == x2 ){
-        printf("You are moving horizontally\n");
-        for(int i = y1+1;i<y2;i++){
-            if(board->squares[x1-1][i-1].piece.type!=' '){
-                printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][y1-1].piece.type,i,y1);
-                return 1;
-            }
-        }
+    int dx = (x2 > x1) ? 1 : (x2 < x1) ? -1 : 0;
+    int dy = (y2 > y1) ? 1 : (y2 < y1) ? -1 : 0;
 
-    }
-    
-    if(y1 == y2){
-        printf("You are moving vertically\n");
-        for(int i = x1+1;i<x2;i++){
-            if(board->squares[i-1][y1-1].piece.type!=' '){
-                printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][y1-1].piece.type,i,y1);
-                return 1;
-            }
-        }
-    }
+    int i = x1 + dx;
+    int j = y1 + dy;
 
-    if(x1 != x2 && y1 != y2){
-        printf("You are moving diagonally\n");
-        if(x1<x2 && y1<y2){
-            printf("Moving bishop down and right\n");
-            for(int i = x1+1,j=y1+1;i<x2 && j<y2;i++,j++){
-                if(board->squares[i-1][j-1].piece.type!=' '){
-                    printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][j-1].piece.type,i,j);
-                    return 1;
-                }
-            }
+    while(i != x2 || j != y2){
+        if(board->squares[i-1][j-1].piece.type != ' '){
+            printf("There is a piece of type %c at %d %d blocking the way\n", board->squares[i-1][j-1].piece.type, i, j);
+            return 1;
         }
-        if(x1<x2 && y1>y2){
-            printf("Moving bishop down and left\n");
-            for(int i = x1+1,j=y1+1;i<x2 && j>y2;i++,j--){
-                if(board->squares[i-1][j-1].piece.type!=' '){
-                    printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][j-1].piece.type,i,j);
-                    return 1;
-                }
-            }
-        }
-        if(x1>x2 && y1>y2){
-            printf("Moving bishop up and left\n");
-            for(int i = x1+1,j=y1+1;i>x2 && j>y2;i--,j--){
-                if(board->squares[i-1][j-1].piece.type!=' '){
-                    printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][j-1].piece.type,i,j);
-                    return 1;
-                }
-            }
-        }
-        if(x1>x2 && y1<y2){
-            printf("Moving bishop up and right\n");
-            for(int i = x1+1,j=y1+1;i>x2 && j<y2;i--,j++){
-                if(board->squares[i-1][j-1].piece.type!=' '){
-                    printf("There is a piece of type %c at %d %d is blocking the way\n",board->squares[i-1][j-1].piece.type,i,j);
-                    return 1;
-                }
-            }
-        }
+        if(i != x2) i += dx;
+        if(j != y2) j += dy;
     }
     return 0;
 }
