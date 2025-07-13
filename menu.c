@@ -22,8 +22,9 @@ void getEndPositionMessage(int* x2,int* y2){
 }
 void showContinueMessage(int* continueGame){
     printf("\n");
-    printf("Continue game? 1.Yes 2.No\n");
-    scanf("%d",continueGame);
+    //printf("Continue game? 1.Yes 2.No\n");
+    //scanf("%d",continueGame);
+    *continueGame = 1;
 }
 int showMenu(Board * board, int* x1, int* y1, int* x2, int* y2, int* continueGame){
     showPlayerTurnMessage(board);
