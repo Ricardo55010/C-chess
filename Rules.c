@@ -46,9 +46,10 @@ int isAValidMove(Payload* payload){
     validationFunction validationFunctions[]={rookMovement,knightMovement,bishopMovement,queenMovement,kingMovement,pawnMovement};
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
+    Piece OriginPiece = payload->board->squares[x1-1][y1-1].piece;
     
     for(int i=0;i<numValidationFunctions;i++){
-        if(pieces[i]==payload->board->squares[x1-1][y1-1].piece.type){
+        if(pieces[i]==OriginPiece.type){
             if(validationFunctions[i](payload)==1){
             return 1;
         }
@@ -56,7 +57,15 @@ int isAValidMove(Payload* payload){
         
     }
     
-
     return 0;
 }
 
+int isThereAPieceOnTheWay(Payload* payload){
+    Board* board = payload->board;
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
+    if(board->squares[x2-1][y2-1].piece.player==board->playerTurn){
+        printf("Invalid move, there is a friendly piece on the way\n");
+        return 1;
+    }
+    return 0;
+}
