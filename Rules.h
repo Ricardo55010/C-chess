@@ -12,5 +12,6 @@ int isPlayerTurn(Payload* payload);
 int isAPiece(Payload* payload);
 int isAValidMove(Payload* payload);
 int isThereAPieceOnTheWay(Payload* payload);
+int isAPieceBlockingTheWay(Payload* payload);
 
 #endif
