@@ -1,6 +1,6 @@
 #include"movements.h"
-#include"rules.h"
-#include"board.h"
+#include"../rules/rules.h"
+#include"../board/board.h"
 
    int pawnMovement(Payload *payload){
        int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;

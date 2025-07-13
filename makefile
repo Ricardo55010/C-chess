@@ -1,3 +1,3 @@
 main:
-	gcc main.c board.c movements.c rules.c menu.c  -o chess
+	gcc ./Chess/main.c ./Chess/board/board.c ./Chess/movements/movements.c ./Chess/rules/rules.c ./Chess/menu/menu.c  -o chess
 	./chess

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Board.h"
-#include "menu.h"
+#include "./board/board.h"
+#include "./menu/menu.h"
 int main(){
     Board* board = (Board*) malloc(sizeof(Board));
     int x1 = 0 , y1 = 0, x2 = 0, y2 = 0;

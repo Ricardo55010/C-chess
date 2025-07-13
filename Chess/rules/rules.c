@@ -1,6 +1,6 @@
-#include "rules.h"
-#include "board.h"
-#include "movements.h"
+#include "../rules/rules.h"
+#include "../board/board.h"
+#include "../movements/movements.h"
 int isOutBounds(Payload* payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     if((x2-1<0 || x2-1>7) || (y2-1<0 || y2-1>7)){

@@ -1,5 +1,5 @@
 #include "menu.h"
-#include "Board.h"
+#include "../board/board.h"
 
 void showPlayerTurnMessage(Board* board){
     printf("\n");
