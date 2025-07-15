@@ -113,3 +113,34 @@ int isOpponentKingInCheck(Payload* payload){
     }
     return 0;
 }
+
+int isPawnPromotionPossible(Payload* payload){
+    Board *board = payload->board;
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
+    int promotionType;
+    if(board->squares[x2-1][y2-1].piece.type=='P' && (x2==8 || x2==1)){
+        printf("Chose pawn promotion\n");
+        printf("1 for queen\n2 for rook\n3 for bishop\n4 for knight\n");
+        scanf("%d",&promotionType);
+        switch(promotionType){
+            case 1:
+                board->squares[x2-1][y2-1].piece.type='Q';
+                break;
+            case 2:
+                board->squares[x2-1][y2-1].piece.type='R';
+                break;
+            case 3:
+                board->squares[x2-1][y2-1].piece.type='B';
+                break;
+            case 4:
+                board->squares[x2-1][y2-1].piece.type='N';
+                break;
+            default:
+                printf("Invalid promotion type\n");
+                return 1;
+        }
+        board->squares[x2-1][y2-1].piece.timesMoved=0;
+        return 1;
+    }
+    return 0;
+}

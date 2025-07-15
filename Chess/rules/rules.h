@@ -15,4 +15,5 @@ int isThereAPieceOnTheWay(Payload* payload);
 int isAPieceBlockingTheWay(Payload* payload);
 int isOwnKingInCheck(Payload* payload);
 int isOpponentKingInCheck(Payload* payload);
+int isPawnPromotionPossible(Payload* payload);
 #endif

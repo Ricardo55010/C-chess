@@ -91,5 +91,6 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
     board->playerTurn= board->playerTurn==1?2:1;
     lookForBothChecks(&payload);
     isOpponentKingInCheck(&payload);
+    isPawnPromotionPossible(&payload);
     return 0;
 }
