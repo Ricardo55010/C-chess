@@ -87,3 +87,62 @@
         return 0;
     }
 
+    int lookForBothChecks(Payload *payload){
+        Board* board = payload->board;
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                
+                if(board->squares[i][j].piece.type=='P'){
+                    Payload payload={board,i,j,i+1,j+1};
+                    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
+                    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
+                        
+                    for(int i=0;i<numValidationFunctions;i++){
+                            if(validationFunctions[i](&payload)==1){
+                                if(board->squares[i+1][j+1].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i+1][j+1].piece.player){
+                                    printf("Check! pawn at %d %d can check the king at %d %d \n",i+1,j+1,i+2,j+2);
+                                }
+                            }
+                    }
+
+                    Payload payload2={board,i,j,i+1,j-1};
+                    validationFunction validationFunctions2[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
+                    int numValidationFunctions2=sizeof(validationFunctions2)/sizeof(validationFunctions2[0]);
+                        
+                    for(int i=0;i<numValidationFunctions2;i++){
+                            if(validationFunctions2[i](&payload2)==1){
+                                if(board->squares[i+1][j-1].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i+1][j-1].piece.player){
+                                    printf("Check! pawn at %d %d can check the king at %d %d \n",i+1,j+1,i+2,j);
+                                }
+                            }
+                    }
+
+                    Payload payload3={board,i,j,i-1,j-1};
+                    validationFunction validationFunctions3[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
+                    int numValidationFunctions3=sizeof(validationFunctions2)/sizeof(validationFunctions2[0]);
+                        
+                    for(int i=0;i<numValidationFunctions3;i++){
+                            if(validationFunctions3[i](&payload3)==1){
+                                if(board->squares[i-1][j-1].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i-1][j-1].piece.player){
+                                    printf("Check! pawn at %d %d can check the king at %d %d \n",i+1,j+1,i,j);
+                                }
+                            }
+                    }
+
+                    Payload payload4={board,i,j,i-1,j+1};
+                    validationFunction validationFunctions4[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
+                    int numValidationFunctions4=sizeof(validationFunctions4)/sizeof(validationFunctions4[0]);
+                        
+                    for(int i=0;i<numValidationFunctions4;i++){
+                            if(validationFunctions4[i](&payload4)==1){
+                                if(board->squares[i-1][j+1].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i-1][j+1].piece.player){
+                                    printf("Check! pawn at %d %d can check the king at %d %d \n",i+1,j+1,i,j+2);
+                                }
+                            }
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+

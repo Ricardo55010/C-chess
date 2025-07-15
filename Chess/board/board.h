@@ -6,6 +6,7 @@
 typedef struct Board{
     Square squares[8][8];
     int playerTurn;
+    int playerInCheck;
 } Board;
 
 int showBoard(Board* board);

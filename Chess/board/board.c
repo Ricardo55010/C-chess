@@ -61,6 +61,7 @@ int initBoard(Board* board){
         }
     }
     board->playerTurn=1;
+    board->playerInCheck=0;
     return 0;
 }
 
@@ -68,7 +69,7 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
     
     Payload payload={board,x1,y1,x2,y2};
 
-    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay};
+    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
 
     int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
     
@@ -88,5 +89,7 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
     board->squares[x1-1][y1-1].piece.player=3;
     board->squares[x1-1][y1-1].piece.timesMoved=0;
     board->playerTurn= board->playerTurn==1?2:1;
+    lookForBothChecks(&payload);
+    isOpponentKingInCheck(&payload);
     return 0;
 }

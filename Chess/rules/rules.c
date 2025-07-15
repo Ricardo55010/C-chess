@@ -93,3 +93,23 @@ int isAPieceBlockingTheWay(Payload* payload){
     }
     return 0;
 }
+
+int isOwnKingInCheck(Payload* payload){
+    Board *board = payload->board;
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
+    if(board->playerInCheck==board->playerTurn){
+        printf("Invalid move, your king is in check\n");
+        return 1;
+    }
+    return 0;
+}
+
+int isOpponentKingInCheck(Payload* payload){
+    Board *board = payload->board;
+    int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
+    if(board->playerInCheck!=board->playerTurn){
+        printf("Your opponent's king is in check\n");
+        return 1;
+    }
+    return 0;
+}

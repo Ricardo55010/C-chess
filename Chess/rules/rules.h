@@ -13,5 +13,6 @@ int isAPiece(Payload* payload);
 int isAValidMove(Payload* payload);
 int isThereAPieceOnTheWay(Payload* payload);
 int isAPieceBlockingTheWay(Payload* payload);
-
+int isOwnKingInCheck(Payload* payload);
+int isOpponentKingInCheck(Payload* payload);
 #endif
