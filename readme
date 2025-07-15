@@ -1,0 +1,8 @@
+This project served the purpose of helping remember the basic of C programming. I will also use it as a way to learn more a refactor and practice other commmon things that i might find useful
+
+How to run:
+
+execute the makefile , this will generate and run the latest version o chess.exe or you can just simply run the chess added to the repository with:
+    ./chess in windows
+
+Thanks for reading all this!
