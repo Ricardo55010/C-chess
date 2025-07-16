@@ -146,3 +146,15 @@
         return 0;
     }
 
+    int switchPlaces(Payload *payload){
+        Board* board = payload->board;
+        int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
+        printf("Moving %c from %d %d to %d %d\n",board->squares[x1-1][y1-1].piece.type,x1,y1,x2,y2);
+        board->squares[x2-1][y2-1].piece.type=board->squares[x1-1][y1-1].piece.type;
+        board->squares[x2-1][y2-1].piece.player=board->squares[x1-1][y1-1].piece.player;
+        board->squares[x2-1][y2-1].piece.timesMoved=board->squares[x1-1][y1-1].piece.timesMoved+1;
+        board->squares[x1-1][y1-1].piece.type=' ';
+        board->squares[x1-1][y1-1].piece.player=3;
+        board->squares[x1-1][y1-1].piece.timesMoved=0;
+        board->playerTurn= board->playerTurn==1?2:1;   
+    }
