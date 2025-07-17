@@ -82,7 +82,6 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
 
 
     switchPlaces(&payload);
-    lookForBothChecks(&payload);
     isOpponentKingInCheck(&payload);
     isPawnPromotionPossible(&payload);
     return 0;
