@@ -1,6 +1,8 @@
 #include "../rules/rules.h"
 #include "../board/board.h"
 #include "../movements/movements.h"
+
+/*Objective: check if the move is out of bounds*/
 int isOutBounds(Payload* payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     if((x2-1<0 || x2-1>7) || (y2-1<0 || y2-1>7)){
@@ -14,7 +16,7 @@ int isOutBounds(Payload* payload){
 
     return 0;
 }
-
+/*Objective: check if the piece player is the same as the player turn*/
 int isPlayerTurn(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1;
@@ -27,6 +29,7 @@ int isPlayerTurn(Payload* payload){
     return 0;
 }
 
+/*Objective: check if there is a piece in the start position*/
 int isAPiece(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1;
@@ -39,7 +42,7 @@ int isAPiece(Payload* payload){
 }
 
 
-
+/*Objective: check if the move is valid depending on the piece*/
 int isAValidMove(Payload* payload){
     
     char pieces[] = {'R', 'N', 'B', 'Q', 'K', 'P'};
@@ -60,6 +63,7 @@ int isAValidMove(Payload* payload){
     return 0;
 }
 
+/*Objective: check if there is a piece on the piece end way*/
 int isThereAPieceOnTheWay(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
@@ -70,6 +74,7 @@ int isThereAPieceOnTheWay(Payload* payload){
     return 0;
 }
 
+/*Objective: check if there is a piece blocking the way, horse can jump so its never blocked*/
 int isAPieceBlockingTheWay(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
@@ -94,6 +99,7 @@ int isAPieceBlockingTheWay(Payload* payload){
     return 0;
 }
 
+/*Objective: check if the player own king is in check*/
 int isOwnKingInCheck(Payload* payload){
     Board *board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
@@ -104,6 +110,8 @@ int isOwnKingInCheck(Payload* payload){
     return 0;
 }
 
+
+/*Objective: check if the opponent's king is in check*/
 int isOpponentKingInCheck(Payload* payload){
     Board *board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;

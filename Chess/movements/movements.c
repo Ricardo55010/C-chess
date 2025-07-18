@@ -1,7 +1,7 @@
 #include"movements.h"
 #include"../rules/rules.h"
 #include"../board/board.h"
-
+/*Objective: Validate the movement of a pawn*/
    int pawnMovement(Payload *payload){
        int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
        Board* board = payload->board;
@@ -31,7 +31,7 @@
         return 0;
    }
         
-   
+ /*Objective: Validate the movement of a rook*/  
    int rookMovement(Payload *payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
        if((y1-y2!=0 && x1-x2!=0)){
@@ -42,7 +42,7 @@
         }
         return 0;
    }
-
+/*Objective: Validate the movement of a bishop*/
    int bishopMovement(Payload *payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
        if((y1-y2==0 || x1-x2==0)){
@@ -53,7 +53,7 @@
         }
         return 0;   
    }
-   
+ /*Objective: Validate the movement of a knight*/  
    int knightMovement(Payload *payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
        if(!(((y1-y2==2 || y1-y2==-2) && (x1-x2==1||x1-x2==-1) || (y1-y2==1 || y1-y2==-1) && (x1-x2==2||x1-x2==-2)))){
@@ -64,7 +64,7 @@
         }
         return 0;
    }
-
+/*Objective: Validate the movement of a queen*/
    int queenMovement(Payload *payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
        if((y1-y2==0 || x1-x2==0 || y1-y2!=0 && x1-x2!=0)){
@@ -75,7 +75,7 @@
         }
         return 0;
     }
-    
+/*Objective: Validate the movement of a king*/    
     int kingMovement(Payload *payload){
         int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
         if(((y1-y2>1 || y1-y2<-1) || (x1-x2>1||x1-x2<-1))){
@@ -86,7 +86,7 @@
         }
         return 0;
     }
-
+/*Objective: Validate if any piece is checking the king*/
     int lookForBothChecks(Payload *payload){
         Board* board = payload->board;
         for(int i=0;i<8;i++){

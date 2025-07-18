@@ -1,7 +1,7 @@
 #include "board.h"
 
 
-
+/*Objective: Print the board highlighting the pieces with the piece player*/
 int showBoard(Board* board){
     int i,j;
     for(i=0;i<8;i++){
@@ -34,6 +34,7 @@ int showBoard(Board* board){
     return 0;
 }
 
+/*Objective: Initialize the board, it uses an array with the order of the pieces*/
 int initBoard(Board* board){
     int i,j;
     char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'};
@@ -65,6 +66,7 @@ int initBoard(Board* board){
     return 0;
 }
 
+/*Objective: Move a piece, it also validates the move with function pointers */
 int movePiece(Board* board,int x1,int y1,int x2,int y2){
     
     Payload payload={board,x1,y1,x2,y2};
