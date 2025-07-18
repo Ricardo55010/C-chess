@@ -37,7 +37,7 @@ int showBoard(Board* board){
 /*Objective: Initialize the board, it uses an array with the order of the pieces*/
 int initBoard(Board* board){
     int i,j;
-    char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'};
+    char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}; // array with the order of the pieces
     for(i=0;i<8;i++){
         for(j=0;j<8;j++){
             board->squares[i][j].x=i+1;
@@ -55,7 +55,7 @@ int initBoard(Board* board){
                 board->squares[i][j].piece.type='P';
             }
             else if(i==0 || i==7){
-                board->squares[i][j].piece.type=piecesFirstLineOrder[j];
+                board->squares[i][j].piece.type=piecesFirstLineOrder[j]; // we use the array to avoid n ifs 
             }
                   
             
@@ -71,12 +71,12 @@ int movePiece(Board* board,int x1,int y1,int x2,int y2){
     
     Payload payload={board,x1,y1,x2,y2};
 
-    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};
+    validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};// array with function pointers to validate the move
 
     int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
     
     for(int i=0;i<numValidationFunctions;i++){
-        if(validationFunctions[i](&payload)==1){
+        if(validationFunctions[i](&payload)==1){ // validate the move with each function pointer
             return 1;
         }
     }

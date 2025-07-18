@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H 
 
-struct Board;
+struct Board; // Forward declaration to avoid circular dependency
 void getStartPositionMessage(int* x1,int* y1);
 void getEndPositionMessage(int* x2,int* y2);
 void showPlayerTurnMessage(struct Board* board);

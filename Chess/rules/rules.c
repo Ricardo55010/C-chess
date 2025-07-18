@@ -46,14 +46,14 @@ int isAPiece(Payload* payload){
 int isAValidMove(Payload* payload){
     
     char pieces[] = {'R', 'N', 'B', 'Q', 'K', 'P'};
-    validationFunction validationFunctions[]={rookMovement,knightMovement,bishopMovement,queenMovement,kingMovement,pawnMovement};
+    validationFunction validationFunctions[]={rookMovement,knightMovement,bishopMovement,queenMovement,kingMovement,pawnMovement}; // array with function pointers
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
-    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
+    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]); // we get the size of the array
     Piece OriginPiece = payload->board->squares[x1-1][y1-1].piece;
     
     for(int i=0;i<numValidationFunctions;i++){
         if(pieces[i]==OriginPiece.type){
-            if(validationFunctions[i](payload)==1){
+            if(validationFunctions[i](payload)==1){ // execute the validation function
             return 1;
         }
         }
@@ -82,9 +82,10 @@ int isAPieceBlockingTheWay(Payload* payload){
         printf("you are a knight, you can jump over pieces!\n");
         return 0;
     }
-    int dx = (x2 > x1) ? 1 : (x2 < x1) ? -1 : 0;
+    // based on the direction we determine the increment
+    int dx = (x2 > x1) ? 1 : (x2 < x1) ? -1 : 0; 
     int dy = (y2 > y1) ? 1 : (y2 < y1) ? -1 : 0;
-
+    // the i position and j position are the same as the start position plus the increment
     int i = x1 + dx;
     int j = y1 + dy;
 
@@ -93,6 +94,7 @@ int isAPieceBlockingTheWay(Payload* payload){
             printf("There is a piece of type %c at %d %d blocking the way\n", board->squares[i-1][j-1].piece.type, i, j);
             return 1;
         }
+
         if(i != x2) i += dx;
         if(j != y2) j += dy;
     }
