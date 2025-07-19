@@ -34,7 +34,7 @@ int isAPiece(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
-    if(OriginPiece.type==' '){ // check if the piece thats being moved is empty
+    if(OriginPiece.type==EMPTY){ // check if the piece thats being moved is empty
         printf("Invalid move, theres no piece in %d %d\n",x1,y1);
         return 1;
     }
@@ -45,7 +45,7 @@ int isAPiece(Payload* payload){
 /*Objective: check if the move is valid depending on the piece*/
 int isAValidMove(Payload* payload){
     
-    char pieces[] = {'R', 'N', 'B', 'Q', 'K', 'P'};
+    enum PieceType pieces[] = {ROOK, KNIGHT, BISHOP, QUEEN, KING, PAWN};
     validationFunction validationFunctions[]={rookMovement,knightMovement,bishopMovement,queenMovement,kingMovement,pawnMovement}; // array with function pointers
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]); // we get the size of the array
@@ -78,7 +78,7 @@ int isThereAPieceOnTheWay(Payload* payload){
 int isAPieceBlockingTheWay(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
-    if(board->squares[x1-1][y1-1].piece.type=='N'){
+    if(board->squares[x1-1][y1-1].piece.type==KNIGHT){
         printf("you are a knight, you can jump over pieces!\n");
         return 0;
     }
@@ -90,7 +90,7 @@ int isAPieceBlockingTheWay(Payload* payload){
     int j = y1 + dy;
 
     while(i != x2 || j != y2){
-        if(board->squares[i-1][j-1].piece.type != ' '){
+        if(board->squares[i-1][j-1].piece.type != EMPTY){
             printf("There is a piece of type %c at %d %d blocking the way\n", board->squares[i-1][j-1].piece.type, i, j);
             return 1;
         }
@@ -128,22 +128,22 @@ int isPawnPromotionPossible(Payload* payload){
     Board *board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     int promotionType;
-    if(board->squares[x2-1][y2-1].piece.type=='P' && (x2==8 || x2==1)){ // if the piece is a pawn and its in the last row
+    if(board->squares[x2-1][y2-1].piece.type==PAWN && (x2==8 || x2==1)){ // if the piece is a pawn and its in the last row
         printf("Chose pawn promotion\n");
         printf("1 for queen\n2 for rook\n3 for bishop\n4 for knight\n");
         scanf("%d",&promotionType);
         switch(promotionType){
             case 1:
-                board->squares[x2-1][y2-1].piece.type='Q';
+                board->squares[x2-1][y2-1].piece.type=QUEEN;
                 break;
             case 2:
-                board->squares[x2-1][y2-1].piece.type='R';
+                board->squares[x2-1][y2-1].piece.type=ROOK;
                 break;
             case 3:
-                board->squares[x2-1][y2-1].piece.type='B';
+                board->squares[x2-1][y2-1].piece.type=BISHOP;
                 break;
             case 4:
-                board->squares[x2-1][y2-1].piece.type='N';
+                board->squares[x2-1][y2-1].piece.type=KNIGHT;
                 break;
             default:
                 printf("Invalid promotion type\n");

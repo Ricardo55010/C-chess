@@ -13,7 +13,7 @@
             printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
             return 0;
         }
-        if(((y1-y2==1||y1-y2==-1) && (x1-x2==1||x1-x2==-1))&& TargetPiece.player!=OriginPiece.player && TargetPiece.type!=' '){
+        if(((y1-y2==1||y1-y2==-1) && (x1-x2==1||x1-x2==-1))&& TargetPiece.player!=OriginPiece.player && TargetPiece.type!=EMPTY){
             printf("Valid move, its a valid move for a pawn that has an enemy piece on the way diagonally\n");
             printf("x1:%d y1:%d x2:%d y2:%d\n",x1,y1,x2,y2);
             printf("x1-x2:%d y1-y2:%d\n",x1-x2,y1-y2);
@@ -92,7 +92,7 @@
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                
-                if(board->squares[i][j].piece.type=='P'){
+                if(board->squares[i][j].piece.type==PAWN){
                     int movsX [] = {1,1,-1,-1};
                     int movsY []= {1,-1,1,-1};
                     int numMovs = sizeof(movsX)/sizeof(movsX[0]);
@@ -103,14 +103,14 @@
                         
                         for(int i=0;i<numValidationFunctions;i++){
                             if(validationFunctions[i](&payload)==1){
-                                if(board->squares[i+movsX[k]][j+movsY[k]].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i+movsX[k]][j+movsY[k]].piece.player){
+                                if(board->squares[i+movsX[k]][j+movsY[k]].piece.type==KING && board->squares[i][j].piece.player!=board->squares[i+movsX[k]][j+movsY[k]].piece.player){
                                     printf("Check! pawn at %d %d can check the king at %d %d \n",i+1,j+1,i+movsX[k]+1,j+movsY[k]+1);
                                 }
                             }
                     }
                 }
 
-                if(board->squares[i][j].piece.type=='B'){
+                if(board->squares[i][j].piece.type==KNIGHT){
                     int movsX [] = {1,1,-1,-1,2,2,-2,-2};
                     int movsY []= {2,-2,2,-2,1,-1,1,-1};
                     int numMovs = sizeof(movsX)/sizeof(movsX[0]);
@@ -121,7 +121,7 @@
                         
                         for(int i=0;i<numValidationFunctions;i++){
                             if(validationFunctions[i](&payload)==1){
-                                if(board->squares[i+movsX[k]][j+movsY[k]].piece.type=='K' && board->squares[i][j].piece.player!=board->squares[i+movsX[k]][j+movsY[k]].piece.player){
+                                if(board->squares[i+movsX[k]][j+movsY[k]].piece.type==KING && board->squares[i][j].piece.player!=board->squares[i+movsX[k]][j+movsY[k]].piece.player){
                                     printf("Check! bishop at %d %d can check the king at %d %d \n",i+1,j+1,i+movsX[k]+1,j+movsY[k]+1);
                                 }
                             }

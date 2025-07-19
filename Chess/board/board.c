@@ -37,7 +37,7 @@ int showBoard(Board* board){
 /*Objective: Initialize the board, it uses an array with the order of the pieces*/
 int initBoard(Board* board){
     int i,j;
-    char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}; // array with the order of the pieces
+    enum PieceType piecesFirstLineOrder[] = {ROOK,KNIGHT,BISHOP,QUEEN,KING,BISHOP,KNIGHT,ROOK}; // array with the order of the pieces
     for(i=0;i<8;i++){
         for(j=0;j<8;j++){
             //get the square position
@@ -45,7 +45,7 @@ int initBoard(Board* board){
             board->squares[i][j].y=j+1;
             //initialize the piece with default values
             board->squares[i][j].piece.player = 3;
-            board->squares[i][j].piece.type = ' ';
+            board->squares[i][j].piece.type = EMPTY;
             board->squares[i][j].piece.timesMoved = 0;
 
             // define whose player the piece is
@@ -56,7 +56,7 @@ int initBoard(Board* board){
             
             // define the type of the piece
             if(i==1 || i==6){
-                board->squares[i][j].piece.type='P';
+                board->squares[i][j].piece.type=PAWN;
             }
             else if(i==0 || i==7){
                 board->squares[i][j].piece.type=piecesFirstLineOrder[j]; // we use the array to avoid n ifs 
