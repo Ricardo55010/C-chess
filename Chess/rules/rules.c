@@ -5,11 +5,11 @@
 /*Objective: check if the move is out of bounds*/
 int isOutBounds(Payload* payload){
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
-    if((x2-1<0 || x2-1>7) || (y2-1<0 || y2-1>7)){
+    if((x2-1<0 || x2-1>7) || (y2-1<0 || y2-1>7)){ // check if the end position is out of bounds
         printf("Invalid move, out of bounds\n");
         return 1;
     }
-    if((x1-1<0 || x1-1>7) || (y1-1<0 || y1-1>7)){
+    if((x1-1<0 || x1-1>7) || (y1-1<0 || y1-1>7)){ // check if the start position is out of bounds
         printf("Invalid move, out of bounds\n");
         return 1; 
     }
@@ -22,7 +22,7 @@ int isPlayerTurn(Payload* payload){
     int x1=payload->x1,y1=payload->y1;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
     int currentPlayerTurn = board->playerTurn;
-    if(OriginPiece.player!=currentPlayerTurn){
+    if(OriginPiece.player!=currentPlayerTurn){ // check if the piece player is the same as the player turn
         printf("Invalid move, its not your turn, player %d\n",OriginPiece.player);
         return 1;
     }
@@ -34,7 +34,7 @@ int isAPiece(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1;
     Piece OriginPiece = board->squares[x1-1][y1-1].piece;
-    if(OriginPiece.type==' '){
+    if(OriginPiece.type==' '){ // check if the piece thats being moved is empty
         printf("Invalid move, theres no piece in %d %d\n",x1,y1);
         return 1;
     }
@@ -63,11 +63,11 @@ int isAValidMove(Payload* payload){
     return 0;
 }
 
-/*Objective: check if there is a piece on the piece end way*/
+/*Objective: check if there is a piece on the piece end way and its friendly*/
 int isThereAPieceOnTheWay(Payload* payload){
     Board* board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
-    if(board->squares[x2-1][y2-1].piece.player==board->playerTurn){
+    if(board->squares[x2-1][y2-1].piece.player==board->playerTurn){ //check if the piece in the end position is friendly
         printf("Invalid move, there is a friendly piece on the way\n");
         return 1;
     }
@@ -128,7 +128,7 @@ int isPawnPromotionPossible(Payload* payload){
     Board *board = payload->board;
     int x1=payload->x1,y1=payload->y1,x2=payload->x2,y2=payload->y2;
     int promotionType;
-    if(board->squares[x2-1][y2-1].piece.type=='P' && (x2==8 || x2==1)){
+    if(board->squares[x2-1][y2-1].piece.type=='P' && (x2==8 || x2==1)){ // if the piece is a pawn and its in the last row
         printf("Chose pawn promotion\n");
         printf("1 for queen\n2 for rook\n3 for bishop\n4 for knight\n");
         scanf("%d",&promotionType);

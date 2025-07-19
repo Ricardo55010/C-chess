@@ -14,13 +14,13 @@ int showBoard(Board* board){
             switch (board->squares[i][j].piece.player)
             {
             case 1:
-                 printf("| %d *%c* %d |",board->squares[i][j].x,board->squares[i][j].piece.type,board->squares[i][j].y);
+                 printf("| %d *%c* %d |",board->squares[i][j].x,board->squares[i][j].piece.type,board->squares[i][j].y); // print player 1 piece
                 break;
             case 2:
-                printf("| %d (%c) %d |",board->squares[i][j].x,board->squares[i][j].piece.type,board->squares[i][j].y);
+                printf("| %d (%c) %d |",board->squares[i][j].x,board->squares[i][j].piece.type,board->squares[i][j].y); // print player 2 piece
                 break;
             default:
-                printf("| %d     %d |",board->squares[i][j].x,board->squares[i][j].y);
+                printf("| %d     %d |",board->squares[i][j].x,board->squares[i][j].y); // print empty square
                 break;
             }
             
@@ -40,17 +40,21 @@ int initBoard(Board* board){
     char piecesFirstLineOrder[] = {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}; // array with the order of the pieces
     for(i=0;i<8;i++){
         for(j=0;j<8;j++){
+            //get the square position
             board->squares[i][j].x=i+1;
             board->squares[i][j].y=j+1;
+            //initialize the piece with default values
             board->squares[i][j].piece.player = 3;
             board->squares[i][j].piece.type = ' ';
             board->squares[i][j].piece.timesMoved = 0;
 
+            // define whose player the piece is
             if(i==0 || i==1)
                 board->squares[i][j].piece.player=1;
             else if (i==6 || i==7)
                 board->squares[i][j].piece.player=2;
-
+            
+            // define the type of the piece
             if(i==1 || i==6){
                 board->squares[i][j].piece.type='P';
             }
@@ -69,11 +73,11 @@ int initBoard(Board* board){
 /*Objective: Move a piece, it also validates the move with function pointers */
 int movePiece(Board* board,int x1,int y1,int x2,int y2){
     
-    Payload payload={board,x1,y1,x2,y2};
+    Payload payload={board,x1,y1,x2,y2}; // we create the payload that will be passed to the functions
 
     validationFunction validationFunctions[]={isOutBounds,isPlayerTurn,isAPiece,isAValidMove,isThereAPieceOnTheWay,isAPieceBlockingTheWay,isOwnKingInCheck};// array with function pointers to validate the move
 
-    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]);
+    int numValidationFunctions=sizeof(validationFunctions)/sizeof(validationFunctions[0]); // we get the size of the array
     
     for(int i=0;i<numValidationFunctions;i++){
         if(validationFunctions[i](&payload)==1){ // validate the move with each function pointer
